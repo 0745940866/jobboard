@@ -3,18 +3,27 @@ services:
     name: jobboard
     env: docker
     plan: free
-    autoDeploy: true
-    dockerfilePath: Dockerfile
-    buildCommand: "composer install && npm install && npm run build"
-    startCommand: "php artisan serve --host=0.0.0.0 --port=80"
+    branch: main
+    buildCommand: ""  # Dockerfile handles everything
+    startCommand: ""  # CMD in Dockerfile is used
     envVars:
       - key: APP_ENV
         value: production
+      - key: APP_DEBUG
+        value: false
       - key: APP_KEY
-        generateValue: true
+        value: base64:2+U5bpZ/EP8l8roiw9q1NWy8oSmm23sqtayfDfOT2nw=
       - key: APP_URL
-        value: https://jobboard.onrender.com
+        value: https://jobboard-ghey.onrender.com
       - key: DB_CONNECTION
         value: sqlite
       - key: DB_DATABASE
-        value: /var/data/database.sqlite
+        value: /var/www/html/database/database.sqlite
+      - key: SESSION_DRIVER
+        value: file
+      - key: SESSION_LIFETIME
+        value: 120
+      - key: SESSION_SECURE_COOKIE
+        value: true
+      - key: SESSION_SAME_SITE
+        value: none
