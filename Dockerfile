@@ -26,7 +26,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install dependencies and optimize
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 RUN php artisan config:clear && php artisan cache:clear && php artisan route:clear
-RUN php artisan key:generate
+
 
 EXPOSE 80
 CMD ["apache2-foreground"]
